@@ -164,6 +164,10 @@ window['Slip'] = (function(){
 
         if (!Array.isArray(this.options.ignoredElements)) throw new Error("ignoredElements must be an Array");
 
+        if (this.options.delay !== 0) {
+          this.options.delay = this.options.delay || 300;
+        }
+
         // Functions used for as event handlers need usable `this` and must not change to be removable
         this.cancel = this.setState.bind(this, this.states.idle);
         this.onTouchStart = this.onTouchStart.bind(this);
@@ -261,7 +265,7 @@ window['Slip'] = (function(){
                                 this.setState(this.states.reorder);
                             }
                         }
-                    }.bind(this), 300);
+                    }.bind(this), this.options.delay);
                 }
 
                 return {
