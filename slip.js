@@ -167,6 +167,7 @@ window['Slip'] = (function(){
         if (this.options.delay !== 0) {
           this.options.delay = this.options.delay || 300;
         }
+        this.options.scrollSpeedFactor = this.options.scrollSpeedFactor || 1;
 
         // Functions used for as event handlers need usable `this` and must not change to be removable
         this.cancel = this.setState.bind(this, this.states.idle);
@@ -858,7 +859,7 @@ window['Slip'] = (function(){
               offset = Math.max(-triggerOffset, topOffset - triggerOffset);
             }
 
-            scrollable.scrollTop = Math.max(0, Math.min(maxScrollTop, scrollable.scrollTop + offset));
+            scrollable.scrollTop = Math.max(0, Math.min(maxScrollTop, scrollable.scrollTop + offset * this.options.scrollSpeedFactor));
         },
 
         dispatch: function(targetNode, eventName, detail) {
